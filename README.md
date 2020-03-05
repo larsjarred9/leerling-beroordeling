@@ -36,3 +36,45 @@ In het overleg zijn we de volgende zaken overeengekomen:
 * De applicatie werkt volledig en voldoet aan de technische eisen.
 *	Bij het niet kunnen voldoen aan de leveringsafspraken zijn de volgende bepalingen van kracht:
 *	De honorering zal per week bij vertraging verminderd worden met 1.0 punt.
+
+# Eisen
+* 1 account met gebruikers en de mogelijkheid om een wachtwoord aan te maken.; 
+* Je moet ingelogd zijn om te kunnen bekijken wat je huidige puntenscore is; 
+* Leuk uitziend voor kinderen tussen groep 1-4, 5-12 jaar, 25 studenten; 
+* Geen Comic Sans; 
+* Font leesbaar, grote letters; 
+* Contrast kleuren, goed leesbaar; 
+* Plus en minpunten met uitleg erbij (meerdere studenten is pluspunt); 
+* Leaderboard qua punten van hoog naar laag; 
+* Niet negatief gaan qua punten; 
+* 25 studenten aanpasbaar zijn zelf aan kunnen maken; 
+* Inlogsysteem met gebruikersnaam en wachtwoord; 
+* Tekstveld voor een opmerking (reden); 
+* Een avatar voor alle studenten; 
+* Contact pagina; 
+* Alleen leraren hebben toegang tot het beoordelingssysteem;
+* Optioneel: Meerdere studenten tegelijk selecteren en een opmerking kunnen plaatsen.
+
+# Terminologie
+## Punten Systeem
+* Het minimumaantal punten dat je kan halen is 0 punten.
+* Nieuwe leerlingen krijgen standaard 50 punten.
+* Leerkrachten kunnen punten optrekken en aftrekken.
+* Een totaaloverzicht van alle leerlingen samen met hun ‘beloningen’ (Pluspunten) en ‘aandachtspunten’ (minpunten) tonen.
+
+## Profiel leaderboard
+* Leraren maken de leerlingen aan via een knop. Deze laad dan een leerlingen aanmaak pagina.
+* De naam van de leerling moet duidelijk zichtbaar zijn in combinatie met de punten die de leerling heeft en de avatar.
+
+## Profiel Aanmaken 
+* Voornaam, achternaam.
+* Avatar wordt voor je gekozen 
+* Profiel krijgt 50 punten. 
+* De leerlingen kunnen kiezen uit 200+ avatars (optioneel)
+
+## Profiel inzien
+* Punten toevoegen of afnemen (reden bijvoegen). 
+* Eerdere handelingen die de docent heeft gedaan inzien. 
+* Leraren kunnen leerlingen verwijderen of wijzigen (gegevens beheer).
+
+# Veel succes
