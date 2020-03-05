@@ -22,3 +22,17 @@ Er zal een websiteapplicatie worden gebouwd waar de docent leerlingen toevoegt e
 Overeengekomen:
 
 In het overleg zijn we de volgende zaken overeengekomen:
+
+*	Er zal een webapplicatie worden om jonge leerlingen te kunnen beoordelen.
+*	De applicatie zal worden opgeleverd via een GitHub download link.
+*	De bestanden van de oplevering zijn PHP, CSS, JS, Images en HTML.
+*	Er zal aan de eisen worden gehouden beschreven in het meegeleverde IPP plan met de gemaakte afspraken.
+
+*	Na oplevering zal de honorering bestaan uit het toekennen van het cijfer 9 indien aan alle onderstaande bepalingen voldaan zijn:
+
+*	Oplevering op overeengekomen tijdstip.
+* De datum van oplevering is 9 april 2020 (5 Weken).
+*	Eerder gemaakt werk voor het tekenen van deze offerte zal worden uitbetaald.
+* De applicatie werkt volledig en voldoet aan de technische eisen.
+*	Bij het niet kunnen voldoen aan de leveringsafspraken zijn de volgende bepalingen van kracht:
+*	De honorering zal per week bij vertraging verminderd worden met 1.0 punt.
