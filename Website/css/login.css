@@ -1,6 +1,7 @@
 @charset "UTF-8";
 body {
-    background-color: #44A7DB;
+    background: rgb(0,185,255);
+    background: linear-gradient(90deg, rgba(0,185,255,1) 0%, rgba(68,167,219,1) 35%, rgba(0,232,255,1) 100%);
 }
 .login-box {
     background-color: white;
