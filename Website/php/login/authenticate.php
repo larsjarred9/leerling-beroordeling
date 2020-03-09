@@ -15,7 +15,9 @@
             $stmt->fetch();
 
             //Nog een hahs systeem includen
-            if ($_POST["password"] === $password) {
+            
+            $pswrd = $_POST["password"];
+            if (md5($pswrd) === $password) {
                 session_regenerate_id();
                 $_SESSION["loggedin"] = TRUE;
                 $_SESSION["name"] = $username;
