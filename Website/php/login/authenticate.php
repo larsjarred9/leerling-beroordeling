@@ -26,12 +26,12 @@
             } else {
                 session_start();
                 session_destroy();
-                header("Location: ../../index.html");
+                header("Location: ../../index.php?pas=false");
             }
         } else {
             session_start();
             session_destroy();
-            header("Location: ../../index.html");
+            header("Location: ../../index.php?pas=false");
         }
         $stmt->close();
     }
