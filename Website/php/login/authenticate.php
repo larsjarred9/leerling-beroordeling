@@ -5,16 +5,14 @@
         die ("Vul beide invoervelden in alstublieft.");
     }
 
-    if($stmt = $conn->prepare("SELECT id,username,password FROM users WHERE username = ?")) {
+    if($stmt = $conn->prepare("SELECT id,username,password,klas,admin FROM users WHERE username = ?")) {
         $stmt->bind_param("s", $_POST["username"]);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($id, $username, $password);
+            $stmt->bind_result($id, $username, $password, $klas, $admin);
             $stmt->fetch();
-
-            //Nog een hahs systeem includen
             
             $pswrd = $_POST["password"];
             if (md5($pswrd) === $password) {
@@ -22,6 +20,8 @@
                 $_SESSION["loggedin"] = TRUE;
                 $_SESSION["name"] = $username;
                 $_SESSION["id"] = $id;
+                $_SESSION['klas'] = $klas;
+                $_SESSION['admin'] = $admin;
                 header("Location: ../../dashboard/index.php");
             } else {
                 session_start();

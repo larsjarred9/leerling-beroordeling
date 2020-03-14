@@ -23,7 +23,7 @@
             <form method="POST" action="php/login/authenticate.php">
                 <div class="form-group">
                     <label>E-mail</label>
-                    <input name="username" id="username" name="username" class="form-control" placeholder="E-mail" type="username">
+                    <input name="username" id="username" name="username" class="form-control" placeholder="E-mail" type="email">
                 </div>
                 <div class="form-group">
                     <label>Wachtwoord</label>

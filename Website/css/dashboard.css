@@ -24,6 +24,14 @@ nav img {
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
 
+.nourl {
+    text-decoration: none;
+    color: black ;
+}
+.nourl:hover {
+    color: rgb(0,185,255);
+}
+
 .btn:focus,
         .btn:active,
         button:focus,

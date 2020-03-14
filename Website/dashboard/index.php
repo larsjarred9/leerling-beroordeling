@@ -1,13 +1,18 @@
 <?php
+session_start();
 require('../php/database.php');
 
-session_start();
 if (!isset($_SESSION["loggedin"])) {
     header("Location: ../index.php");
     exit();
 }
-$sql = "SELECT * FROM leerlingen ORDER BY punten DESC;";
+
+$admin = $_SESSION['admin'];
+$klas = $_SESSION['klas'];
+$sql = "SELECT * FROM leerlingen WHERE klas = " . $klas . " ORDER BY punten DESC;";
 $result = $conn->query($sql);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,8 +45,8 @@ $result = $conn->query($sql);
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"><button type="button" class="btn btn-light" data-toggle="modal" data-target="#addgebruiker"  ><i class="fas fa-plus"></i> Add User</button></a>
-                    
+                        <a class="nav-link"><button type="button" class="btn btn-light" data-toggle="modal" data-target="#addgebruiker"><i class="fas fa-plus"></i> Add User</button></a>
+
                     </li>
                 </ul>
             </div>
@@ -49,28 +54,44 @@ $result = $conn->query($sql);
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <?php foreach ($result as $item) {
-                echo "<div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3'>
-                    <div class='card'>
-                        <div class='card-body'>
-                            <div class='float-left'>
-                                <h3>" . $item['voornaam'] . "</h3>
-                                <br><h5>" . $item['punten'] . " Punten</h5>
+            <?php
+            if ($result == NULL) { //Dit is dus kaduk
+                echo "                
+                <div class='col-7'>
+                    <a class='nourl' href='#'>
+                        <div class='card'>
+                            <div class='card-body'>
+                                <h3>Er zitten momenteel nog geen leerlingen in deze klas.</h3>
                             </div>
-                            <div class='float-right'>
-                                <img src='../IMG/avatars/".$item['avatar']."' style='min-height: 100px; min-width: 60px;'>
+                            <div class='card-footer'>
+                                U kunt een leerling toevoegen via de administrator of via de maak leerling aan knop.
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>";
-            }
-            if ($item < 50) {
-                echo '<h3 style="color:#39ff14">';
             } else {
-                echo '<h3 style="color:#ff073a">';
+                foreach ($result as $item) {
+                    echo "
+                <div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3'>
+                    <a class='nourl' href='#'>
+                        <div class='card'>
+                            <div class='card-body'>
+                                <div class='float-left'>
+                                    <h3>" . $item['voornaam'] . "</h3>
+                                    <br><h5>" . $item['punten'] . " Punten</h5>
+                                </div>
+                                <div class='float-right'>
+                                    <img src='../IMG/avatars/" . $item['avatar'] . "' style='min-height: 100px; min-width: 60px;'>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                ";
+                }
             }
-
-
+            //Hier zo moet staan dat de docuent geen leerlingen in zijn groep heeft.
             ?>
         </div>
     </div>
@@ -98,6 +119,18 @@ $result = $conn->query($sql);
                         <div class="form-group">
                             <label for="Telefoonummer">Telefoonummer (Ouder)</label>
                             <input type="tel" class="form-control" id="telefoonummer" placeholder="Telefoonummer" name="telefoon" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="klas">Klas</label>
+                            <?php
+                            if ($admin == 1) {
+                                //Change (Admin [1])
+                                echo "<input type='text' class='form-control' id='klas' placeholder='Klas' name='klas' required>";
+                            } else {
+                                //Read (Normal [0])
+                                echo "<input readonly type='text' class='form-control' id='klas' placeholder='Klas' value='$klas' name='klas' required>";
+                            }
+                            ?>
                         </div>
                         <div class="form-group">
                             <label for="Email">E-Mail (Ouder)</label>
