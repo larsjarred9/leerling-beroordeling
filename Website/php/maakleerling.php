@@ -13,15 +13,16 @@ if (!isset($_POST["voornaam"], $_POST["achternaam"], $_POST["telefoon"], $_POST[
     return false;
 }
 
-if ($stmt = $conn->prepare("INSERT INTO leerlingen (id, voornaam, achternaam, telefoon, email, klas) VALUES (NULL,?,?,?,?,?)")) {
+if ($stmt = $conn->prepare("INSERT INTO leerlingen (id, voornaam, achternaam, telefoon, email, klas, avatar) VALUES (NULL,?,?,?,?,?, ?)")) {
 
     $stmt->bind_param(
-        "ssiss",
+        "ssisss",
         $_POST["voornaam"],
         $_POST["achternaam"],
         $_POST["telefoon"],
         $_POST["email"],
         $_POST["klas"],
+        $_POST["avatar"],
     );
 
     $stmt->execute();

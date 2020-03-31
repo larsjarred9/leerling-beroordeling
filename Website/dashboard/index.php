@@ -34,12 +34,12 @@ $result = $conn->query($sql);
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
-            <div class="navbar-collapse collapse" id="navbar9">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link margin-fix dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"></i> <?= $_SESSION['name'] ?> </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../account.php"><i class="fas fa-info-circle"></i> Account Information</a>
+                            <a class="dropdown-item" href="../dashboard/account.php"><i class="fas fa-info-circle"></i> Account Information</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="..\php\login\logout.php"><i class="fas fa-sign-out-alt"></i> Log-Out</a>
                         </div>
@@ -55,40 +55,56 @@ $result = $conn->query($sql);
     <div class="container-fluid">
         <div class="row">
             <?php
-            if ($result == NULL) { //Dit is dus kaduk
+            if (!$result) {
                 echo "                
                 <div class='col-7'>
                     <a class='nourl' href='#'>
                         <div class='card'>
                             <div class='card-body'>
-                                <h3>Er zitten momenteel nog geen leerlingen in deze klas.</h3>
+                                <h3>Users could not be loaded.</h3>
                             </div>
                             <div class='card-footer'>
-                                U kunt een leerling toevoegen via de administrator of via de maak leerling aan knop.
+                                Please contact your system administator if you think this is an issue.
                             </div>
                         </div>
                     </a>
                 </div>";
             } else {
-                foreach ($result as $item) {
-                    echo "
-                <div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3'>
-                    <a class='nourl' href='#'>
-                        <div class='card'>
-                            <div class='card-body'>
-                                <div class='float-left'>
-                                    <h3>" . $item['voornaam'] . "</h3>
-                                    <br><h5>" . $item['punten'] . " Punten</h5>
+                if ($result->num_rows === 0) {
+                    echo "                
+                    <div class='col-7'>
+                        <a class='nourl' href='#'>
+                            <div class='card'>
+                                <div class='card-body'>
+                                    <h3>There are zero (0) students in your class.</h3>
                                 </div>
-                                <div class='float-right'>
-                                    <img src='../IMG/avatars/" . $item['avatar'] . "' style='min-height: 100px; min-width: 60px;'>
+                                <div class='card-footer'>
+                                    You can add a student by contacting your system administator our add one yourself with the button.
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                
-                ";
+                        </a>
+                    </div>";
+                } else {
+                    foreach ($result as $item) {
+                        echo "
+                    <div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3'>
+                        <a class='nourl' href='user.php?id=".$item['id']."'>
+                            <div class='card'>
+                                <div class='card-body'>
+                                    <div class='float-left'>
+                                        <h3>" . $item['voornaam'] . "</h3>
+                                        <br><h5>" . $item['punten'] . " Points</h5>
+                                    </div>
+                                    <div class='float-right'>
+                                        <img src='../IMG/avatars/" . $item['avatar'] . "' style='min-height: 100px; min-width: 60px;'>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    ";
+                    }
                 }
             }
             //Hier zo moet staan dat de docuent geen leerlingen in zijn groep heeft.
@@ -99,7 +115,7 @@ $result = $conn->query($sql);
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Voeg leerling toe</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add a student</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -108,33 +124,118 @@ $result = $conn->query($sql);
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="voornaam">Voornaam</label>
-                                <input type="text" class="form-control" id="voornaam" name="voornaam" placeholder="Voornaam" required>
+                                <label for="voornaam">First Name</label>
+                                <input type="text" class="form-control" id="voornaam" name="voornaam" placeholder="First Name" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="achternaam">Achternaam</label>
-                                <input type="text" class="form-control" id="achternaam" name="achternaam" placeholder="Achternaam" required>
+                                <label for="achternaam">Last Name</label>
+                                <input type="text" class="form-control" id="achternaam" name="achternaam" placeholder="Last Name" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Telefoonummer">Telefoonummer (Ouder)</label>
-                            <input type="tel" class="form-control" id="telefoonummer" placeholder="Telefoonummer" name="telefoon" required>
+                            <label for="Telefoonummer">Tel (Parent)</label>
+                            <input type="tel" class="form-control" id="telefoonummer" placeholder="Tel" name="telefoon" required>
                         </div>
                         <div class="form-group">
-                            <label for="klas">Klas</label>
+                            <label for="Email">E-Mail (Parent)</label>
+                            <input type="email" class="form-control" id="email" placeholder="E-Mail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="klas">Class</label>
                             <?php
                             if ($admin == 1) {
                                 //Change (Admin [1])
-                                echo "<input type='text' class='form-control' id='klas' placeholder='Klas' name='klas' required>";
+                                echo "<input type='text' class='form-control' id='klas' placeholder='Class' name='klas' required>";
                             } else {
                                 //Read (Normal [0])
-                                echo "<input readonly type='text' class='form-control' id='klas' placeholder='Klas' value='$klas' name='klas' required>";
+                                echo "<input readonly type='text' class='form-control' id='klas' placeholder='Class' value='$klas' name='klas' required>";
                             }
                             ?>
                         </div>
-                        <div class="form-group">
-                            <label for="Email">E-Mail (Ouder)</label>
-                            <input type="email" class="form-control" id="email" placeholder="E-Mail" name="email" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <p>Select a suiting avatar</p>
+                                <table border="0" align="center" cellpadding="2" cellspacing="2">
+                                    <tr>
+                                        <td><img src="../IMG/avatars/Kid1.svg" checked alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value checked="Kid1.svg" name="avatar"></td>
+                                        <td><img src="../IMG/avatars/Kid2.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid2.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid3.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid3.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid19.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid19.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid25.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid25.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid31.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid31.svg" name="avatar" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../IMG/avatars/Kid4.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid4.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid5.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid5.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid6.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid6.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid20.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid20.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid26.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid26.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid32.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid32.svg" name="avatar" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../IMG/avatars/Kid7.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid7.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid8.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid8.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid9.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid9.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid21.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid21.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid27.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid27.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid33.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid33.svg" name="avatar" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../IMG/avatars/Kid10.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid10.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid11.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid11.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid12.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid12.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid22.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid22.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid28.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid28.svg" name="avatar" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../IMG/avatars/Kid13.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid13.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid14.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid14.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid15.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid15.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid23.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid23.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid29.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid29.svg" name="avatar" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../IMG/avatars/Kid16.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid16.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid17.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid17.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid18.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid18.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid24.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid24.svg" name="avatar" /></td>
+                                        <td><img src="../IMG/avatars/Kid30.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" value="Kid30.svg" name="avatar" /></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -144,10 +245,8 @@ $result = $conn->query($sql);
                 </form>
             </div>
         </div>
-    </div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
-
-</html>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <</body>
+</html></html>

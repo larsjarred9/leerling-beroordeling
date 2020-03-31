@@ -22,6 +22,7 @@
                 $_SESSION["id"] = $id;
                 $_SESSION['klas'] = $klas;
                 $_SESSION['admin'] = $admin;
+                $_SESSION['password'] = $password;
                 header("Location: ../../dashboard/index.php");
             } else {
                 session_start();
