@@ -37,13 +37,13 @@ $email = $_SESSION['name'];
                     <li class="nav-item dropdown">
                         <a class="nav-link margin-fix dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"></i> <?= $_SESSION['name'] ?> </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../dashboard/index.php"><i class="fas fa-users"></i> My Classroom</a>
+                            <a class="dropdown-item" href="../dashboard/account.php"><i class="fas fa-info-circle"></i> Account Information</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="..\php\login\logout.php"><i class="fas fa-sign-out-alt"></i> Log-Out</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php"><button type="button" class="btn btn-light" onclick="next()" data-target="#addgebruiker"><i class="fas fa-plus"></i> Add User</button></a>
+                        <a class="nav-link" href="index.php"><button type="button" class="btn btn-light"><i class="fas fa-users"></i> My Classroom</button></a>
 
                     </li>
                 </ul>
@@ -62,6 +62,7 @@ $email = $_SESSION['name'];
                 <label for="class">Your Class</label>
                 <input required type="number" class="form-control" id="email" value="<?php echo $klas; ?>" disabled>
             </div>
+            <hr>
             <h5 class="modal-title">Change your Password</h5>
             <div class="form-group">
                 <label for="class">Old Password</label>
@@ -94,11 +95,6 @@ $email = $_SESSION['name'];
             ?>
         </form>
     </div>
-    <script>
-        function next(){
-            window.location.href = $("('#myModal').modal('show')").attr("href");
-        }
-    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

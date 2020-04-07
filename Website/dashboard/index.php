@@ -9,7 +9,7 @@ if (!isset($_SESSION["loggedin"])) {
 
 $admin = $_SESSION['admin'];
 $klas = $_SESSION['klas'];
-$sql = "SELECT * FROM leerlingen WHERE klas = " . $klas . " ORDER BY punten DESC;";
+$sql = "SELECT * FROM leerlingen WHERE klas = " . $klas . " AND disable = 'false' ORDER BY punten DESC, voornaam ASC;";
 $result = $conn->query($sql);
 
 
@@ -154,11 +154,11 @@ $result = $conn->query($sql);
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <p>Select a suiting avatar</p>
+                                <p>Select Avatar</p>
                                 <table border="0" align="center" cellpadding="2" cellspacing="2">
                                     <tr>
-                                        <td><img src="../IMG/avatars/Kid1.svg" checked alt="" width="32" height="32" /></td>
-                                        <td><input type="radio" value checked="Kid1.svg" name="avatar"></td>
+                                        <td><img src="../IMG/avatars/Kid1.svg" alt="" width="32" height="32" /></td>
+                                        <td><input type="radio" checked value="Kid1.svg" name="avatar"></td>
                                         <td><img src="../IMG/avatars/Kid2.svg" alt="" width="32" height="32" /></td>
                                         <td><input type="radio" value="Kid2.svg" name="avatar" /></td>
                                         <td><img src="../IMG/avatars/Kid3.svg" alt="" width="32" height="32" /></td>
@@ -239,8 +239,8 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Anuleren</button>
-                        <input type="submit" class="btn btn-success">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <input type="submit" class="btn btn-success" value="Send">
                     </div>
                 </form>
             </div>

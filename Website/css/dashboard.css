@@ -58,3 +58,46 @@ nav img {
             margin-top: 15px;
             margin-bottom: 15px;
         }
+.float-left{
+    float:left;
+}
+.float-right{
+    float:right;
+}
+
+/*maak je geen zorgen lars ik kan dit zomaar verwijderen you know :) just in case can ik did verwijderen*/
+  /*.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  .container-custom:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  .container-custom input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .container-custom input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .container-custom .checkmark:after {
+       top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+  }*/
