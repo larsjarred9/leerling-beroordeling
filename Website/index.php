@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label>Wachtwoord</label>
-                    <input name="password" id="password" class="form-control" placeholder="******" type="password">
+                    <input name="password" id="password" class="form-control" placeholder="********" type="password">
                 </div>
                 <div class="form-group">
                     <button id="submit" type="submit" class="btn btn-primary btn-block" name="Inloggen">Inloggen</button>
